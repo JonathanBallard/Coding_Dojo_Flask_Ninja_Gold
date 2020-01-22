@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <title>Ninja Gold</title>
+</head>
+<body>
+
+    
+
+    <div class="wrapper bg-dark m-3">
+
+        <h1 class="display-1 text-danger text-center">--Ninja Gold--</i></h1>
+
+        <div class="gold-count">
+            <h1 class="display-3 text-light"><i class="fas fa-coins ml-2"></i>  Your Gold: {{session['gold']}}</h1>
+        </div>
+
+        <div class="form-group form-box bg-primary d-inline-block m-2">
+            <form action="/process_money" method="post">
+                <input type="hidden" name="location" value="farm">
+                <h2 class="display-2">Farm:</h2>
+                <p class="display-4">Earns 10-20 <i class="fas fa-coins m-2 fa-xs"></i></p>
+                <input type="submit" class="btn btn-dark text-light m-2" value="Go To Farm">
+            </form>
+        </div>
+
+        <div class="form-group form-box bg-warning d-inline-block m-2">
+            <form action="\process_money" method="post">
+                <input type="hidden" name="location" value="cave">
+                <h2 class="display-2">Cave:</h2>
+                <p class="display-4">Earns 5-10 <i class="fas fa-coins m-2 fa-xs"></i></p>
+                <input type="submit" class="btn btn-dark text-light m-2" value="Go To Cave">
+            </form>
+        </div>
+
+        <div class="form-group form-box bg-info d-inline-block m-2">
+            <form action="\process_money" method="post">
+                <input type="hidden" name="location" value="house">
+                <h2 class="display-2">House:</h2>
+                <p class="display-4">Earns 2-5 <i class="fas fa-coins m-2 fa-xs"></i></p>
+                <input type="submit" class="btn btn-dark text-light m-2" value="Go To House">
+            </form>
+        </div>
+
+        <div class="form-group form-box bg-success d-inline-block m-2">
+            <form action="\process_money" method="post">
+                <input type="hidden" name="location" value="casino">
+                <h2 class="display-2">Casino:</h2>
+                <p class="display-4">Earns/Takes 0-50 <i class="fas fa-coins m-2 fa-xs"></i></p>
+                <input type="submit" class="btn btn-dark text-light m-2" value="Go To Casino">
+            </form>
+        </div>
+
+        <h1 class="display-4 text-warning">Activities:</h1>
+        <div class="activity_box m-3 bg-light text-danger border border-primary">   
+            <p>{{message}}</p>
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+</html>
