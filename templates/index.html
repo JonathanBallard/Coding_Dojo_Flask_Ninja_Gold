@@ -69,10 +69,13 @@
         </div>
 
         <h1 class="display-4 text-warning">Activities:</h1>
-        <div class="activity_box m-3 bg-light text-danger border border-primary">   
-            <p>{{message}}</p>
-
+        <div class="activity_box m-3 bg-light border border-primary">
+            <ul>
+                {{message|safe}}
+            </ul>
         </div>
+
+        <a href="/destroy_session" class="btn btn-danger m-5 p-2">Reset the Game!</a>
 
 
     </div>

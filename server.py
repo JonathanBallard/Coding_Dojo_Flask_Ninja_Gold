@@ -21,7 +21,7 @@ def process_money():
 
     if session['location'] == 'farm':
         randGold = random.randint(10,20)
-        message = "You went to the farm and got " + str(randGold) + " gold"
+        message = "<li class='text-success'>You went to the farm and earned " + str(randGold) + " gold</li>"
 
         if 'gold' in session:
             session['gold'] += int(randGold)
@@ -30,7 +30,7 @@ def process_money():
 
     elif session['location'] == 'cave':
         randGold = random.randint(5,10)
-        message = "You went to the cave and got " + str(randGold) + " gold"
+        message = "<li class='text-success'>You went to the cave and found " + str(randGold) + " gold</li>"
 
         if 'gold' in session:
             session['gold'] += int(randGold)
@@ -40,7 +40,7 @@ def process_money():
 
     elif session['location'] == 'house':
         randGold = random.randint(2,5)
-        message = "You went to the house and got " + str(randGold) + " gold"
+        message = "<li class='text-success'>You went to the house and stole " + str(randGold) + " gold</li>"
 
         if 'gold' in session:
             session['gold'] += int(randGold)
@@ -51,11 +51,11 @@ def process_money():
     elif session['location'] == 'casino':
         randGold = random.randint(-50,50)
         if randGold > 0:
-            message = "You went to the casino and got " + str(randGold) + " gold"
+            message = "<li class='text-success'>You went to the casino and won " + str(randGold) + " gold</li>"
         elif randGold == 0:
-            message = "You went to the casino and broke even!"
+            message = "<li class='text-info'>You went to the casino and broke even!</li>"
         else:
-            message = "You went to the casino and lost " + str(randGold) + " gold"
+            message = "<li class='text-danger'>You went to the casino and lost " + str(randGold) + " gold</li>"
 
         if 'gold' in session:
             session['gold'] += int(randGold)
