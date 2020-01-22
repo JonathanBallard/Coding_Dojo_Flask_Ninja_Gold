@@ -26,11 +26,25 @@
 
     <div class="wrapper bg-dark m-3">
 
-        <h1 class="display-1 text-danger text-center">--Ninja Gold--</i></h1>
+        <h1 class="display-1 text-info text-center">--Ninja Gold--</i></h1>
 
         <div class="gold-count">
             <h1 class="display-3 text-light"><i class="fas fa-coins ml-2"></i>  Your Gold: {{session['gold']}}</h1>
         </div>
+
+        <div class="move-count">
+            <h1 class="display-3 text-light"><i class="fa fa-arrow-up" aria-hidden="true"></i>  Your Moves: {{session['moves']}}</h1>
+        </div>
+
+        {% if session['gold'] >= 200 %}
+            <h1 class="display-1 text-success">YOU WIN!!!</h1>
+            <a href="/destroy_session" class="btn btn-danger m-5 p-2">Reset the Game!</a>
+
+
+        {% elif session['moves'] >= 15 %}
+            <h1 class="display-1 text-danger">YOU LOSE</h1>
+            <a href="/destroy_session" class="btn btn-danger m-5 p-2">Reset the Game!</a>
+        {% else %}
 
         <div class="form-group form-box bg-primary d-inline-block m-2">
             <form action="/process_money" method="post">
@@ -70,12 +84,14 @@
 
         <h1 class="display-4 text-warning">Activities:</h1>
         <div class="activity_box m-3 bg-light border border-primary">
-            <ul>
-                {{message|safe}}
+            <ul class="bg-dark">
+                {% for i in session['messages']|reverse %}
+                    {{i|safe}}
+                {% endfor %}
             </ul>
         </div>
-
-        <a href="/destroy_session" class="btn btn-danger m-5 p-2">Reset the Game!</a>
+        {% endif %}
+        
 
 
     </div>

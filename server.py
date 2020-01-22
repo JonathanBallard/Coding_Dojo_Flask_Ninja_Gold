@@ -9,7 +9,22 @@ app.secret_key = 'keep it secret, keep it safe' # set a secret key for security 
 
 @app.route('/')
 def index():
-    message = "<ul><li>Hello</li></ul>"
+
+    if 'gold' not in session:
+        session['gold'] = 0
+
+
+    message = ""
+    if 'messages' in session:
+        session['messages'].append(message)
+    else:
+        session['messages'] = []
+
+    if 'moves' in session:
+        pass
+    else:
+        session['moves'] = 0
+
     return render_template("index.html", message=message)
 
 
@@ -17,11 +32,16 @@ def index():
 def process_money():
     session['location'] = request.form['location']
     print('process money', 'location: ' , session['location'])
-    
+
+    if 'moves' in session:
+        session['moves'] += 1
+    else:
+        session['moves'] = 0
 
     if session['location'] == 'farm':
         randGold = random.randint(10,20)
         message = "<li class='text-success'>You went to the farm and earned " + str(randGold) + " gold</li>"
+        session['messages'].append(message)
 
         if 'gold' in session:
             session['gold'] += int(randGold)
@@ -31,6 +51,7 @@ def process_money():
     elif session['location'] == 'cave':
         randGold = random.randint(5,10)
         message = "<li class='text-success'>You went to the cave and found " + str(randGold) + " gold</li>"
+        session['messages'].append(message)
 
         if 'gold' in session:
             session['gold'] += int(randGold)
@@ -41,6 +62,7 @@ def process_money():
     elif session['location'] == 'house':
         randGold = random.randint(2,5)
         message = "<li class='text-success'>You went to the house and stole " + str(randGold) + " gold</li>"
+        session['messages'].append(message)
 
         if 'gold' in session:
             session['gold'] += int(randGold)
@@ -52,10 +74,13 @@ def process_money():
         randGold = random.randint(-50,50)
         if randGold > 0:
             message = "<li class='text-success'>You went to the casino and won " + str(randGold) + " gold</li>"
+            session['messages'].append(message)
         elif randGold == 0:
             message = "<li class='text-info'>You went to the casino and broke even!</li>"
+            session['messages'].append(message)
         else:
             message = "<li class='text-danger'>You went to the casino and lost " + str(randGold) + " gold</li>"
+            session['messages'].append(message)
 
         if 'gold' in session:
             session['gold'] += int(randGold)
@@ -63,7 +88,7 @@ def process_money():
             session['gold'] = int(randGold)
     
     
-    return render_template("index.html", message=message)
+    return redirect("/")
 
 @app.route('/destroy_session')
 def destroy():
