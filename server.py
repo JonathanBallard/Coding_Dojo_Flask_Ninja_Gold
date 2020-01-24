@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, session
 import random
+from datetime import datetime
+
+
 app = Flask(__name__)
 app.secret_key = 'keep it secret, keep it safe' # set a secret key for security purposes
 # our index route will handle rendering our form
@@ -40,7 +43,7 @@ def process_money():
 
     if session['location'] == 'farm':
         randGold = random.randint(10,20)
-        message = "<li class='text-success'>You went to the farm and earned " + str(randGold) + " gold</li>"
+        message = "<li class='text-success'>You went to the farm and earned " + str(randGold) + " gold at " + str(datetime.now()) + "</li>"
         session['messages'].append(message)
 
         if 'gold' in session:
@@ -50,7 +53,7 @@ def process_money():
 
     elif session['location'] == 'cave':
         randGold = random.randint(5,10)
-        message = "<li class='text-success'>You went to the cave and found " + str(randGold) + " gold</li>"
+        message = "<li class='text-success'>You went to the cave and found " + str(randGold) + " gold at " + str(datetime.now()) + "</li>"
         session['messages'].append(message)
 
         if 'gold' in session:
@@ -61,7 +64,7 @@ def process_money():
 
     elif session['location'] == 'house':
         randGold = random.randint(2,5)
-        message = "<li class='text-success'>You went to the house and stole " + str(randGold) + " gold</li>"
+        message = "<li class='text-success'>You went to the house and stole " + str(randGold) + " gold at " + str(datetime.now()) + "</li>"
         session['messages'].append(message)
 
         if 'gold' in session:
@@ -73,13 +76,13 @@ def process_money():
     elif session['location'] == 'casino':
         randGold = random.randint(-50,50)
         if randGold > 0:
-            message = "<li class='text-success'>You went to the casino and won " + str(randGold) + " gold</li>"
+            message = "<li class='text-success'>You went to the casino and won " + str(randGold) + " gold at " + str(datetime.now()) + "</li>"
             session['messages'].append(message)
         elif randGold == 0:
-            message = "<li class='text-info'>You went to the casino and broke even!</li>"
+            message = "<li class='text-info'>You went to the casino and broke even at " + str(datetime.now()) + "!</li>"
             session['messages'].append(message)
         else:
-            message = "<li class='text-danger'>You went to the casino and lost " + str(randGold) + " gold</li>"
+            message = "<li class='text-danger'>You went to the casino and lost " + str(randGold) + " gold at " + str(datetime.now()) + "</li>"
             session['messages'].append(message)
 
         if 'gold' in session:
