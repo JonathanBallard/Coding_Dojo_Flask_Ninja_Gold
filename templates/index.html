@@ -85,9 +85,11 @@
         <h1 class="display-4 text-warning">Activities:</h1>
         <div class="activity_box m-3 bg-light border border-primary">
             <ul class="bg-dark">
-                {% for i in session['messages']|reverse %}
-                    {{i|safe}}
-                {% endfor %}
+                <div class="" style="overflow:auto; width: auto; height: 100px;">
+                    {% for i in session['messages']|reverse %}
+                        {{i|safe}}
+                    {% endfor %}
+                </div>
             </ul>
         </div>
         {% endif %}
